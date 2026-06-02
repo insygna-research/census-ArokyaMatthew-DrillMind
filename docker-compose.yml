@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  drillmind:
+    build: .
+    container_name: drillmind-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      DRILLMIND_MAX_ROWS: "50000"        # 0 = full dataset
+      DRILLMIND_LOG_LEVEL: "INFO"
+      DRILLMIND_LOG_JSON: "0"             # set to 1 for ELK/Loki shipping
+      DRILLMIND_LLM_PROVIDER: "fallback"  # ollama | openai | anthropic | fallback
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

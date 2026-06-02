@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drillmind"
+version = "0.4.0"
+description = "Real-time drilling analytics, multi-agent orchestration, hybrid RAG, persistent alerts"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "DrillMind Contributors"},
+]
+
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "openpyxl>=3.1",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+    "loguru>=0.7",
+    "websockets>=12.0",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "httpx>=0.27",
+    # ----- Additional runtime packages -----
+    "prometheus_client>=0.20",        # /metrics
+    "rank_bm25>=0.2.2",               # hybrid RAG (BM25 lexical retriever)
+]
+
+[project.optional-dependencies]
+rag = [
+    "chromadb>=0.5",
+    "sentence-transformers>=3.0",
+    "datasets>=3.0",
+]
+ml = [
+    "torch>=2.0",
+    "scikit-learn>=1.5",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+]
+all = ["drillmind[rag,ml,dev]"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
