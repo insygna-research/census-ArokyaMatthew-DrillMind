@@ -26,7 +26,11 @@ Everything runs in a single process: FastAPI for the REST API and WebSockets, a 
 -->
 <!-- ![DrillMind dashboard](docs/demo.gif) -->
 
-_A short screen recording of the live dashboard goes here._
+
+https://github.com/user-attachments/assets/13f00ffb-0a9c-4084-9289-cc6388ef67ee
+
+
+_Recording of the live dashboard._
 
 ---
 
@@ -56,7 +60,7 @@ At startup DrillMind loads the time-indexed Volve log, builds a feature matrix (
 
 ---
 
-## The assistant
+## The Assistant
 
 ![Assistant query flow](docs/assistant.png)
 
